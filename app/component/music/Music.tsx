@@ -6,7 +6,7 @@ import { Text } from "@/app/component/Text/Text";
 const ballet = Ballet;
 
 // Troque pelo número real do WhatsApp (formato internacional, só dígitos)
-const WHATSAPP_URL = "https://wa.me/5541999999999";
+const WHATSAPP_URL = "https://wa.me/5541996262562";
 
 export default function Music() {
     return (

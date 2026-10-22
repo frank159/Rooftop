@@ -52,8 +52,7 @@ const spaces: Space[] = [
         title: "Salão Panorâmico",
         description: [
             "Mesas estrategicamente posicionadas para garantir a melhor vista da cidade.",
-            "Almoço de terça a sábado com som de teclado ao vivo todos os dias.",
-            "Jantar à luz de velas e música ao vivo, de quinta a sábado.",
+            "Almoço de terça a sábado com som de teclado ao vivo todos os dias."
         ],
         buttonLabel: "Fazer reserva",
         buttonHref: "#reserva",

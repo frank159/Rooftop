@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Bilbo_Swash_Caps } from "next/font/google";
 import { motion, useReducedMotion } from "framer-motion";
@@ -9,6 +10,96 @@ import { Ballet } from "@/app/font/ballet";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const bilboSwashCaps = Bilbo_Swash_Caps({ subsets: ["latin"], weight: "400" });
+
+const COQUETELARIA_IMGS = [
+    { src: "/imgs/destaques/drink0.png", alt: "drink 01" },
+    { src: "/imgs/destaques/drink1.png", alt: "drink 02" },
+    { src: "/imgs/destaques/drink2.png", alt: "drink 03" },
+    { src: "/imgs/destaques/drink3.png", alt: "drink 04" },
+    { src: "/imgs/destaques/drink4.png", alt: "drink 05" },
+];
+
+const GASTRONOMIA_IMGS = [
+    { src: "/imgs/destaques/gastro0.png", alt: "gastro 01" },
+    { src: "/imgs/destaques/gastro1.png", alt: "gastro 02" },
+    { src: "/imgs/destaques/gastro2.png", alt: "gastro 03" },
+    { src: "/imgs/destaques/gastro3.png", alt: "gastro 04" },
+    { src: "/imgs/destaques/gastro4.png", alt: "gastro 05" },
+];
+
+type Slide = { src: string; alt: string };
+
+function ImageCarousel({
+    images,
+    interval = 5000,
+}: {
+    images: Slide[];
+    interval?: number;
+}) {
+    const [{ current, prev }, setSlide] = useState({ current: 0, prev: -1 });
+
+    const next = useCallback(
+        () =>
+            setSlide((s) => ({
+                current: (s.current + 1) % images.length,
+                prev: s.current,
+            })),
+        [images.length],
+    );
+
+    // Reinicia a cada troca, então um clique também dá o intervalo completo
+    useEffect(() => {
+        if (images.length < 2) return;
+        const id = setTimeout(next, interval);
+        return () => clearTimeout(id);
+    }, [current, next, interval, images.length]);
+
+    return (
+        <div
+            role="button"
+            tabIndex={0}
+            aria-label="Próxima imagem"
+            onClick={next}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    next();
+                }
+            }}
+            className="relative aspect-[759/392] w-full max-w-[759px] cursor-pointer select-none overflow-hidden"
+        >
+            {images.map((img, i) => {
+                const isCurrent = i === current;
+                const isPrev = i === prev;
+
+                return (
+                    <div
+                        key={img.src}
+                        aria-hidden={!isCurrent}
+                        className={`absolute inset-0 transition-[opacity,transform] duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                            isCurrent
+                                ? "z-20 scale-100 opacity-100"
+                                : isPrev
+                                  ? "z-10 scale-100 opacity-100"
+                                  : "z-0 scale-[1.04] opacity-0"
+                        }`}
+                    >
+                        <Image
+                            src={img.src}
+                            alt={img.alt}
+                            fill
+                            quality={90}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 759px"
+                            className="object-cover"
+                        />
+                    </div>
+                );
+            })}
+
+            <div className="pointer-events-none absolute inset-0 z-30 bg-black/20" />
+        </div>
+    );
+}
 
 function AltaGastronomia() {
     const reduce = useReducedMotion();
@@ -23,17 +114,7 @@ function AltaGastronomia() {
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 1, ease: EASE }}
             >
-                <div className="relative aspect-[759/392] w-full max-w-[759px] overflow-hidden">
-                    <Image
-                        src="/imgs/alta_gastronomia.png"
-                        alt="Prato de atum selado com folhas e legumes"
-                        fill
-                        quality={90}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 759px"
-                        className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/20" />
-                </div>
+                <ImageCarousel images={GASTRONOMIA_IMGS} />
             </motion.div>
 
             {/* Texto */}
@@ -89,17 +170,7 @@ function Coquetelaria() {
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 1, ease: EASE }}
             >
-                <div className="relative aspect-[759/392] w-full max-w-[759px] overflow-hidden">
-                    <Image
-                        src="/imgs/coquetelaria.png"
-                        alt="Drinks servidos ao lado de uma luminária de cobre"
-                        fill
-                        quality={90}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 759px"
-                        className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/20" />
-                </div>
+                <ImageCarousel images={COQUETELARIA_IMGS} />
             </motion.div>
 
             {/* Texto */}
