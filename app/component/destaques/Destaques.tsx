@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Title } from "@/app/component/TItle/Title";
 import { Text } from "@/app/component/Text/Text";
 import { Ballet } from "@/app/font/ballet";
+import { Button } from "../Button/Button";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const bilboSwashCaps = Bilbo_Swash_Caps({ subsets: ["latin"], weight: "400" });
@@ -76,13 +77,12 @@ function ImageCarousel({
                     <div
                         key={img.src}
                         aria-hidden={!isCurrent}
-                        className={`absolute inset-0 transition-[opacity,transform] duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-                            isCurrent
+                        className={`absolute inset-0 transition-[opacity,transform] duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${isCurrent
                                 ? "z-20 scale-100 opacity-100"
                                 : isPrev
-                                  ? "z-10 scale-100 opacity-100"
-                                  : "z-0 scale-[1.04] opacity-0"
-                        }`}
+                                    ? "z-10 scale-100 opacity-100"
+                                    : "z-0 scale-[1.04] opacity-0"
+                            }`}
                     >
                         <Image
                             src={img.src}
@@ -146,12 +146,13 @@ function AltaGastronomia() {
                     </Text>
                 </div>
 
-                <a
+                <Button
                     href="#cardapio"
-                    className="relative z-10 mt-6 border border-[#8a4a1e] px-3 py-2 font-arima text-xs uppercase tracking-wide text-[#8a4a1e] transition-colors hover:bg-[#8a4a1e] hover:text-[#979258] md:text-sm"
+                    variant="outline"
+                    className="relative z-10 mt-6 px-3 py-2 md:text-sm"
                 >
                     Ver cardápio
-                </a>
+                </Button>
             </motion.div>
         </div>
     );
@@ -184,12 +185,12 @@ function Coquetelaria() {
                 <div className="relative flex flex-row items-baseline">
                     <span
                         aria-hidden
-                        className={`${Ballet.className} pointer-events-none absolute left-31 -top-8 z-0 select-none text-[200px] leading-none text-[#8a4a1e] md:-left-24 md:-top-20 `}
+                        className={`${Ballet.className} pointer-events-none absolute left-31 -top-8 z-20 select-none text-[200px] leading-none text-[#8a4a1e] md:-left-24 md:-top-20 `}
                     >
                         C
                     </span>
 
-                    <Title as="h1" className="relative z-10 text-[#2D0B04]">
+                    <Title as="h1" className="relative z-90 text-[#2D0B04]">
                         Coquetelaria
                     </Title>
 
@@ -200,7 +201,7 @@ function Coquetelaria() {
                     </span>
                 </div>
 
-                <div className="relative z-10 mt-3 max-w-md space-y-1 md:max-w-lg">
+                <div className="relative z-90 mt-3 max-w-md space-y-1 md:max-w-lg">
                     <Text size="sm" className="text-[#2D0B04]">
                         Drinks clássicos, criações autorais exclusivas e contemporâneas
                         feitos pelo nosso bar.
@@ -210,13 +211,13 @@ function Coquetelaria() {
                         artesanais feitos na nossa própria casa.
                     </Text>
                 </div>
-
-                <a
+                <Button
                     href="#cardapio"
-                    className="relative z-10 mt-6 border border-[#8a4a1e] px-3 py-2 font-arima text-xs uppercase tracking-wide text-[#8a4a1e] transition-colors hover:bg-[#8a4a1e] hover:text-[#979258] md:text-sm"
+                    variant="outline"
+                    className="relative z-10 mt-6 px-3 py-2 md:text-sm"
                 >
                     Ver carta de drinks
-                </a>
+                </Button>
             </motion.div>
         </div>
     );

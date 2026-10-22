@@ -6,6 +6,7 @@ import { Ballet } from "@/app/font/ballet";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Title } from "@/app/component/TItle/Title";
 import { Text } from "@/app/component/Text/Text";
+import { Button } from "@/app/component/Button/Button";
 
 const ballet = Ballet
 
@@ -51,6 +52,7 @@ function Word({ children, index }: { children: ReactNode; index: number }) {
 }
 
 /** Botão que sobe com leve escala, em cascata. */
+/** Envolve o Button com a entrada em cascata + hover/tap do botão antigo. */
 function HeroButton({
     children,
     href,
@@ -62,9 +64,8 @@ function HeroButton({
 }) {
     const reduce = useReducedMotion();
     return (
-        <motion.a
-            href={href}
-            className="bg-[#8f8f55] px-3.5 py-2.5 font-arima text-sm font-medium uppercase tracking-wide text-[#2a1a10] transition-colors hover:bg-[#a3a566] md:text-base"
+        <motion.div
+            className="inline-flex"
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             whileHover={reduce ? undefined : { y: -2 }}
@@ -75,11 +76,12 @@ function HeroButton({
                 delay: T.buttons + index * T.buttonsStep,
             }}
         >
-            {children}
-        </motion.a>
+            <Button href={href} variant="filled">
+                {children}
+            </Button>
+        </motion.div>
     );
 }
-
 export default function HeroSection() {
     const reduce = useReducedMotion();
     const { scrollY } = useScroll();

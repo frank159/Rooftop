@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Ballet } from "@/app/font/ballet";
 import { Title } from "@/app/component/TItle/Title";
 import { Text } from "@/app/component/Text/Text";
+import { Button } from "../Button/Button";
 
 const ballet = Ballet;
 
@@ -49,14 +50,14 @@ export default function Music() {
                                 a vista panorâmica. Oferecemos almoços ao som de teclado e jantares
                                 à luz de velas com música ao vivo.
                             </Text>
-                            
-
-                            <a
-                                href="#programacao"
-                                className="mt-6 border border-[#a3a566] px-3 py-2 font-serif text-xs tracking-wide text-[#a3a566] transition-colors [font-variant:small-caps] hover:bg-[#a3a566] hover:text-[#270600] md:text-sm"
+                            <Button
+                                href="#reservas"
+                                variant="outline"
+                                className="mt-6 px-3 py-2 md:text-sm"
+                                colors={{ text: "#979258", border: "#979258", hoverBg: "#504c22", hoverText: "#979258", hoverBorder: "#504c22" }}
                             >
                                 Ver programação da semana
-                            </a>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -76,14 +77,14 @@ export default function Music() {
                     <br /> Nos chame no Whats, ficaremos felizes em te atender.
                 </Text>
 
-                <a
+                <Button
                     href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-8 border border-[#8a4a1e] px-3 py-2 font-serif text-xs tracking-wide text-[#8a4a1e] transition-colors [font-variant:small-caps] hover:bg-[#8a4a1e] hover:text-[#979258] md:mt-6 md:text-sm"
+                    variant="outline"
+                    colors={{ text: "#7C5020", border: "#7C5020", hoverBg: "#534f20", hoverText: "#cec2b6", hoverBorder: "#504c22" }}
+                    className="mt-8 px-3 py-2 font-serif [font-variant:small-caps] md:mt-6"
                 >
                     Entrar em contato
-                </a>
+                </Button>
             </section>
         </div>
     );
