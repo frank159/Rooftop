@@ -26,7 +26,7 @@ export default function Music() {
                 <div className="absolute inset-0 bg-black/40 md:bg-black/5" />
 
                 {/* Conteúdo */}
-                <div className="relative z-10 mx-auto w-full max-w-[1456px] px-5 md:px-16">
+                <div className="relative z-10 md:ml-60 px-5 md:px-16">
                     <div className="relative max-w-4xl">
                         {/* "M" decorativo */}
                         <span
