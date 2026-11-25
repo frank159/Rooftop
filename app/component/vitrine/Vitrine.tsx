@@ -8,10 +8,8 @@ import { Title } from "@/app/component/TItle/Title";
 import { Text } from "@/app/component/Text/Text";
 import { Button } from "../Button/Button";
 
-// curva suave no começo e no fim (usada nas animações principais)
 const EASE_SOFT: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
-// Texto: o container escalona os filhos, que entram da esquerda para a direita
 const textContainer: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.07, delayChildren: 0 } },
@@ -57,7 +55,7 @@ const spaces: Space[] = [
             "Um lounge ao ar livre projetado para você apreciar o horizonte do melhor ângulo. Desfrute da nossa coquetelaria autoral em um ambiente charmoso, cercado por vegetação e uma vista panorâmica de tirar o fôlego.",
         ],
         buttonLabel: "Fazer reserva",
-        buttonHref: "#reserva",
+        buttonHref: "https://wa.me/5541996262562?text=Olá!%20Gostaria%20de%20mais%20informações.",
         image: "/imgs/vitrini/TERRAÇO_OPEN_AIR.png",
         alt: "Terraço ao ar livre com sofás e vista da cidade",
     },
@@ -70,7 +68,7 @@ const spaces: Space[] = [
             "Almoço de terça a sábado com som de teclado ao vivo todos os dias.",
         ],
         buttonLabel: "Fazer reserva",
-        buttonHref: "#reserva",
+        buttonHref: "https://wa.me/5541996262562?text=Olá!%20Gostaria%20de%20mais%20informações.",
         image: "/imgs/vitrini/SALÃO_PANORÂMICO.png",
         alt: "Mesa posta no salão com janelas panorâmicas",
     },
@@ -114,7 +112,12 @@ function SpaceContent({ space }: { space: Space }) {
             </div>
 
             <motion.div variants={textItem} className="mt-4 md:mt-6">
-                <Button href={space.buttonHref} variant="outline">
+                <Button
+                    href={space.buttonHref}
+                    variant="outline"
+                    target={space.buttonLabel === "Fazer reserva" ? "_blank" : undefined}
+                    rel={space.buttonLabel === "Fazer reserva" ? "noopener noreferrer" : undefined}
+                >
                     {space.buttonLabel}
                 </Button>
             </motion.div>
@@ -128,11 +131,9 @@ export default function Vitrine() {
     const active = spaces.find((s) => s.id === activeId) ?? spaces[0];
 
     return (
-        // reducedMotion="user": quem pede menos movimento no sistema recebe só o fade
         <MotionConfig reducedMotion="user">
             <section className="flex h-svh w-full snap-center flex-col bg-[#979258] py-4 md:block md:h-auto md:py-10">
                 <div className="flex min-h-0 flex-1 flex-col gap-4 md:grid md:grid-cols-[1.9fr_1fr] md:gap-0">
-                    {/* Imagem */}
                     <div className="relative ml-[calc(50%-50vw)] min-h-[22svh] w-screen flex-1 overflow-hidden md:ml-0 md:aspect-[2.14/1] md:min-h-0 md:w-full md:flex-none md:self-stretch">
                         <AnimatePresence mode="popLayout">
                             {/* A nova imagem entra por cima da antiga; a antiga só sai
@@ -167,7 +168,6 @@ export default function Vitrine() {
                         </AnimatePresence>
                     </div>
 
-                    {/* Texto + abas */}
                     <div className="flex shrink-0 flex-col justify-between gap-4 border-t border-[#8a4a1e] px-0 pt-3 md:relative md:ml-5 md:gap-5 md:border-t-0 md:px-4 md:py-4 md:pt-0 md:before:absolute md:before:-bottom-4 md:before:-top-4 md:before:left-0 md:before:w-[1px] md:before:bg-[#8a4a1e] md:before:content-['']">
                         {/* Altura reservada = a do MAIOR texto naquela largura de tela.
                             Os 4 textos ficam empilhados e invisíveis só para "medir";
@@ -203,7 +203,6 @@ export default function Vitrine() {
                             </div>
                         </div>
 
-                        {/* Abas */}
                         <div role="tablist" aria-label="Espaços" className="flex flex-col md:max-w-xs">
                             {spaces.map((space) => {
                                 const isActive = space.id === activeId;

@@ -14,7 +14,6 @@ const sizeMap = {
   xl: "text-5xl md:text-6xl lg:text-7xl",
 } as const;
 
-// h1: 48px no mobile, 64px a partir do md
 const h1Size = "text-5xl md:text-[64px]";
 
 export function Title({

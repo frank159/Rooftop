@@ -9,7 +9,7 @@ const ballet = Ballet
 export default function InfoSection() {
   return (
     <div className="overflow-hidden bg-[#979258] px-5 pt-24 md:py-32">
-      <div className="relative py-10 mx-auto flex max-w-5xl flex-col items-center justify-center text-center">
+      <div id="sobre" className="relative py-10 mx-auto flex max-w-5xl flex-col items-center justify-center text-center">
         <span
           aria-hidden
           className={`${ballet.className} pointer-events-none absolute left-1/2 top-1/2 z-0 translate-x-[-5%] translate-y-[-92%] select-none text-[150px] leading-none text-[#8a4a1e] md:translate-x-[15%] md:translate-y-[-67%] md:text-[200px]`}

@@ -1,4 +1,3 @@
-// app/component/Button/Button.tsx
 import type { ComponentProps, CSSProperties } from "react";
 import { Bona_Nova_SC } from "next/font/google";
 
@@ -17,7 +16,6 @@ type Variant = "filled" | "outline" | "light";
 
 type ButtonProps = {
     variant?: Variant;
-    /** Sobrescreve qualquer cor do preset. Aceita qualquer valor CSS de cor. */
     colors?: Partial<ButtonColors>;
 } & (
     | ({ href: string } & Omit<ComponentProps<"a">, "href">)
@@ -25,7 +23,6 @@ type ButtonProps = {
 );
 
 const PRESETS: Record<Variant, ButtonColors> = {
-    // foto 1: fundo oliva, texto e borda marrom escuro
     filled: {
         bg: "#979258",
         text: "#2D0B04",
@@ -34,7 +31,6 @@ const PRESETS: Record<Variant, ButtonColors> = {
         hoverText: "#979258",
         hoverBorder: "#979258",
     },
-    // foto 2: transparente, borda e texto marrom
     outline: {
         bg: "transparent",
         text: "#8a4a1e",
@@ -43,7 +39,6 @@ const PRESETS: Record<Variant, ButtonColors> = {
         hoverText: "#979258",
         hoverBorder: "#8a4a1e",
     },
-    // para fundos escuros (hero)
     light: {
         bg: "transparent",
         text: "#a3a566",

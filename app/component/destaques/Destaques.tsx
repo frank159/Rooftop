@@ -48,7 +48,6 @@ function ImageCarousel({
         [images.length],
     );
 
-    // Reinicia a cada troca, então um clique também dá o intervalo completo
     useEffect(() => {
         if (images.length < 2) return;
         const id = setTimeout(next, interval);
@@ -106,7 +105,6 @@ function AltaGastronomia() {
 
     return (
         <div className="flex flex-col md:grid md:grid-cols-2 md:items-start md:gap-12 xl:grid-cols-[1fr_759px] xl:gap-16">
-            {/* Foto: vem depois do texto (mobile e desktop) */}
             <motion.div
                 className="order-2 -mx-5 flex flex-col items-center gap-3 md:mx-0"
                 initial={reduce ? { opacity: 0 } : { opacity: 0, x: 40 }}
@@ -117,7 +115,6 @@ function AltaGastronomia() {
                 <ImageCarousel images={GASTRONOMIA_IMGS} />
             </motion.div>
 
-            {/* Texto */}
             <motion.div
                 className="order-1 flex flex-col items-end pb-8 pt-8 text-right md:pb-0 md:pt-0"
                 initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
@@ -125,7 +122,7 @@ function AltaGastronomia() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.9, ease: EASE, delay: 0.15 }}
             >
-                <div className="relative">
+                <div id="cozinha" className="relative">
                     <span
                         aria-hidden
                         className={`${Ballet.className} pointer-events-none absolute -left-25 top-0 z-0 select-none text-[150px] leading-none text-[#8a4a1e] md:-left-20 md:-top-14 md:text-[200px] lg:-left-33 lg:-top-9.5`}
@@ -147,7 +144,6 @@ function AltaGastronomia() {
                 </div>
 
                 <Button
-                    href="#cardapio"
                     variant="outline"
                     className="relative z-10 mt-6 px-3 py-2 md:text-sm"
                 >
@@ -163,7 +159,6 @@ function Coquetelaria() {
 
     return (
         <div className="flex flex-col md:grid md:grid-cols-2 md:items-end md:gap-12 xl:grid-cols-[759px_1fr] xl:gap-16 min-[1760px]:-mt-6">
-            {/* Foto */}
             <motion.div
                 className="order-1 -mx-5 flex flex-col items-center gap-3 md:mx-0"
                 initial={reduce ? { opacity: 0 } : { opacity: 0, x: -40 }}
@@ -174,7 +169,6 @@ function Coquetelaria() {
                 <ImageCarousel images={COQUETELARIA_IMGS} />
             </motion.div>
 
-            {/* Texto */}
             <motion.div
                 className="order-2 flex flex-col items-start pt-10 md:pt-0 md:text-left"
                 initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}

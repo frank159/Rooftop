@@ -28,11 +28,9 @@ const T = {
     note: 1.6,
 };
 
-/** Palavra do título: sobe de dentro de uma máscara (overflow hidden). */
 function Word({ children, index }: { children: ReactNode; index: number }) {
     const reduce = useReducedMotion();
     return (
-        // padding/margem negativa evitam cortar acentos (Ç, Á...) das letras
         <span className="inline-block overflow-hidden align-bottom pt-[0.12em] -mt-[0.12em] pb-[0.15em] -mb-[0.15em]">
             <motion.span
                 className="inline-block"
@@ -51,16 +49,18 @@ function Word({ children, index }: { children: ReactNode; index: number }) {
     );
 }
 
-/** Botão que sobe com leve escala, em cascata. */
-/** Envolve o Button com a entrada em cascata + hover/tap do botão antigo. */
 function HeroButton({
     children,
     href,
     index,
+    target,
+    rel,
 }: {
     children: ReactNode;
     href: string;
     index: number;
+    target?: "_blank";
+    rel?: string;
 }) {
     const reduce = useReducedMotion();
     return (
@@ -76,7 +76,7 @@ function HeroButton({
                 delay: T.buttons + index * T.buttonsStep,
             }}
         >
-            <Button href={href} variant="filled">
+            <Button href={href} target={target} rel={rel} variant="filled">
                 {children}
             </Button>
         </motion.div>
@@ -100,7 +100,6 @@ export default function HeroSection() {
             id="home"
             className="relative flex min-h-svh w-full flex-col justify-start overflow-hidden bg-[#270600] text-white md:justify-center"
         >
-            {/* Fundo: zoom out lento + parallax leve no scroll */}
             <motion.div className="absolute inset-0" style={{ y: bgY }}>
                 <motion.div
                     className="absolute inset-0 scale-110"
@@ -108,12 +107,10 @@ export default function HeroSection() {
                     animate={{ scale: 1 }}
                     transition={{ duration: 2, ease: EASE }}
                 >
-                    {/* Mobile: imagem vertical */}
                     <div
                         className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
                         style={{ backgroundImage: "url('/imgs/heroSectionMobile.png')" }}
                     />
-                    {/* Desktop: imagem horizontal (adicione em public/imgs) */}
                     <div
                         className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat md:block"
                         style={{ backgroundImage: "url('/imgs/heroSection.png')" }}
@@ -129,10 +126,8 @@ export default function HeroSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
 
-            {/* Conteúdo */}
             <div className="relative z-10 w-full px-5 pt-40 pb-24 md:px-16 md:py-0 lg:px-32">
                 <div className="relative max-w-[18rem] sm:max-w-md md:max-w-3xl">
-                    {/* "D" decorativo (Ballet): revelado da esquerda pra direita */}
                     <motion.span
                         aria-hidden
                         className={`${ballet.className} pointer-events-none absolute -top-11 -left-6 z-0 select-none text-[8rem] leading-none text-[#a3a566] md:-top-12 md:left-[20rem] md:text-[12rem] lg:left-[27rem]`}
@@ -175,10 +170,15 @@ export default function HeroSection() {
                         </motion.div>
 
                         <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
-                            <HeroButton href="#reserva" index={0}>
+                            <HeroButton
+                                href="https://wa.me/5541996262562?text=Olá!%20Gostaria%20de%20mais%20informações."
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                index={0}
+                            >
                                 Fazer reserva
                             </HeroButton>
-                            <HeroButton href="#cardapio" index={1}>
+                            <HeroButton href="" index={1}>
                                 Ver cardápio
                             </HeroButton>
                         </div>
